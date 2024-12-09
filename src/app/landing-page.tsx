@@ -32,7 +32,7 @@ const LandingPage: React.FC = () => {
                 <div id={keyPointDescriptionSectionId} className="relative w-full md:w-1/2 h-72 md:h-72 order-2 md:order-1">
                     <div className="absolute right-0 top-0 rounded-full overflow-hidden w-3/5 md:w-auto h-auto md:h-full aspect-square">
                         <Image
-                            className="rounded-lg shadow-lg"
+                            className="rounded-lg shadow-lg object-cover"
                             src={getCdnUrl(selectedKeyPoint?.image?.url) ?? ''}
                             alt={selectedKeyPoint?.image?.alternativeText ?? selectedKeyPoint?.title ?? ''}
                             width={400}
