@@ -1,0 +1,36 @@
+name: Deploy Production
+
+on:
+  push:
+    branches:
+      - 'main'
+  workflow_dispatch:
+
+jobs:
+  define_tag:
+    environment: preview
+    runs-on: ubuntu-latest
+    outputs:
+      imageUrl: ${{ steps.imageTag.outputs.url }}
+      image: ${{ steps.imageTag.outputs.image }}
+      tag: ${{ steps.imageTag.outputs.tag }}
+    steps:
+      - id: hash
+        uses: prompt/actions-commit-hash@v3
+        with:
+          commit: '${{ github.sha }}'
+          prefix: ''
+      - id: imageTag
+        name: Define tag
+        run: |
+          COMMIT_HASH="${{ steps.hash.outputs.short }}"
+          echo $COMMIT_HASH
+          echo "url=${{ vars.ECR_REGISTRY }}:latest" >> "$GITHUB_OUTPUT"
+          echo "tag=latest" >> "$GITHUB_OUTPUT"
+          echo "image=$ECR_REPO_NAME:latest" >> "$GITHUB_OUTPUT"
+  build:
+    needs: define_tag
+    uses: ./.github/workflows/build.yml
+    with:
+      image_tag: ${{ needs.define_tag.outputs.imageUrl }}
+    secrets: inherit
