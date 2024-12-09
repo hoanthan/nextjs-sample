@@ -2,8 +2,6 @@ import type { NextConfig } from "next";
 
 const cdnUrl = new URL(process.env.NEXT_PUBLIC_API_DOMAIN!);
 
-console.log(cdnUrl)
-
 const nextConfig: NextConfig = {
   /* config options here */
     images: {
@@ -12,7 +10,8 @@ const nextConfig: NextConfig = {
             hostname: 'localhost',
             port: cdnUrl.port,
         }]
-    }
+    },
+    output: "standalone"
 };
 
 export default nextConfig;
