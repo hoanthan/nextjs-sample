@@ -6,9 +6,7 @@ const nextConfig: NextConfig = {
   /* config options here */
     images: {
         remotePatterns: [{
-            protocol: cdnUrl.protocol.slice(0, -1) as never,
-            hostname: 'localhost',
-            port: cdnUrl.port,
+            hostname: 'strapi.hoanthan.info'
         }]
     },
     output: "standalone"
