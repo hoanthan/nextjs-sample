@@ -3,6 +3,8 @@ import getQueryClient from "@/react-query/query-client";
 import {client} from "@/api";
 import LandingPage from "@/app/landing-page";
 
+export const revalidate = 0
+
 export default async function LandingPageRoute() {
   const queryClient = getQueryClient();
 
